@@ -63,7 +63,8 @@ const TodoList = () => {
                                     <button className="btn btn-primary" >Update</button>
                                 </Link>
                                 &nbsp;
-                                <button className="btn btn-danger" onClick={() => setAlert({ show: true })}>Delete</button>
+                                <button className="btn btn-danger" onClick={() => onDeleteHandle(todo.id)}>Delete Previous</button>
+                                <button className="btn btn-danger" onClick={() => setAlert({ show: true, id: todo.id })}>Delete</button>
                                 <SweetAlert
                                     show={alert.show}
                                     warning
@@ -72,9 +73,10 @@ const TodoList = () => {
                                     confirmBtnBsStyle="danger"
                                     cancelBtnBsStyle="default"
                                     title="Are you sure?"
-                                    onConfirm={() => onDeleteHandle(todo.id)}
+                                    onConfirm={() => onDeleteHandle(alert.id)}
                                     onCancel={() => onDeleteCancel()}
                                 >
+                                    ID = {todo.id}<br></br>
                                     You will not be able to recover this imaginary file!
                                 </SweetAlert>
                             </td>

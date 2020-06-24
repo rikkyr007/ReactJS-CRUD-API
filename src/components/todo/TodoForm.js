@@ -7,7 +7,7 @@ const TodoForm = (props) => {
     const TodoState = {
         id: null,
         content: "",
-        status: ""
+        status: "0"
     }
     const [todo, setTodo] = useState(TodoState);
 
@@ -74,9 +74,9 @@ const TodoForm = (props) => {
     }, [])
 
     //CARA DEBUG ASYNCHRONOUS
-    // useEffect(() => {
-    //     console.log(todo)
-    // },[todo])
+    useEffect(() => {
+        console.log(todo)
+    }, [todo])
 
 
     return (
