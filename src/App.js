@@ -8,6 +8,7 @@ import TodoList from "./components/todo/TodoList";
 // import TodoCreate from "./components/todo/TodoCreate";
 // import TodoEdit from "./components/todo/TodoEdit";
 import TodoForm from "./components/todo/TodoForm";
+import AssignmentList from "./components/assignment/AssignmentList";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             {/* <Route exact path="/todo/add/x/" component={TodoCreate} /> */}
             <Route exact path="/todo/edit/:id" component={TodoForm} />
             {/* <Route exact path="/todo/edit/x/:id" component={TodoEdit} /> */}
+            <Route exact path="/todo/assignment/:id" component={AssignmentList} />
           </Switch>
         </div>
       </div>

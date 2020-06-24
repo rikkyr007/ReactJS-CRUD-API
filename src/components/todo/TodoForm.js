@@ -1,6 +1,7 @@
 import React, {
     useState, useEffect
 } from "react";
+import swal from "sweetalert"
 import todoService from "../../services/TodoService";
 
 const TodoForm = (props) => {
@@ -10,6 +11,7 @@ const TodoForm = (props) => {
         status: "0"
     }
     const [todo, setTodo] = useState(TodoState);
+    const [alert, setAlert] = useState({ show: false })
 
     //ambil id
     const id = props.match.params.id;
@@ -38,7 +40,10 @@ const TodoForm = (props) => {
                     content: response.data.content,
                     status: response.data.status
                 })
-                props.history.push('/todo/list');
+                swal("Success!", "data has been saved successfully!", "success")
+                    .then((res) => {
+                        props.history.push('/todo/list');
+                    });
             })
             .catch(e => {
                 console.log(e)
@@ -58,11 +63,18 @@ const TodoForm = (props) => {
     const updateTodo = () => {
         todoService.update(todo.id, todo)
             .then(response => {
-                props.history.push('/todo/list');
+                swal("Success!", "data has been saved successfully!", "success")
+                    .then((res) => {
+                        props.history.push('/todo/list');
+                    });
             })
             .catch(e => {
                 console.log(e)
             })
+    }
+
+    const hideAlert = () => {
+        setAlert({ show: false })
     }
 
 
@@ -74,9 +86,9 @@ const TodoForm = (props) => {
     }, [])
 
     //CARA DEBUG ASYNCHRONOUS
-    useEffect(() => {
-        console.log(todo)
-    }, [todo])
+    // useEffect(() => {
+    //     console.log(todo)
+    // }, [todo])
 
 
     return (
