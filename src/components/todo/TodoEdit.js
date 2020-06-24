@@ -33,7 +33,7 @@ const TodoEdit = (props) => {
     const updateTodo = () => {
         todoService.update(currentData.id, currentData)
             .then(response => {
-                props.history.push('/');
+                props.history.push('/todo');
             })
             .catch(e => {
                 console.log(e)
