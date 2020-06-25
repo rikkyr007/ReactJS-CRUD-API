@@ -94,7 +94,7 @@ const TodoForm = (props) => {
     return (
         <div>
             <div className="form-group">
-                <label htmlFor="content">Content 123</label>
+                <label htmlFor="content">Content</label>
                 <input
                     type="text"
                     className="form-control"

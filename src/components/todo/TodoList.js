@@ -5,7 +5,7 @@ import todoService from "../../services/TodoService";
 import { Link } from "react-router-dom";
 import SweetAlert from 'react-bootstrap-sweetalert';
 
-const TodoList = () => {
+const TodoList = (props) => {
 
     const [todo, setTodo] = useState([])
     const [alert, setAlert] = useState({ show: false })
@@ -39,7 +39,6 @@ const TodoList = () => {
         getData()
     }, [])
 
-
     return (
         <div>
             <center><h1>Todo List</h1></center>
@@ -63,7 +62,6 @@ const TodoList = () => {
                                     <button className="btn btn-primary" >Update</button>
                                 </Link>
                                 &nbsp;
-                                {/* <button className="btn btn-danger" onClick={() => onDeleteHandle(todo.id)}>Delete Previous</button> */}
                                 <button className="btn btn-danger" onClick={() => setAlert({ show: true, id: todo.id })}>Delete</button>
                                 <SweetAlert
                                     show={alert.show}
@@ -79,9 +77,7 @@ const TodoList = () => {
                                     You will not be able to recover this imaginary file!
                                 </SweetAlert>
                                 &nbsp;
-                                <Link to={'/todo/assignment/' + todo.id}>
-                                    <button className="btn btn-warning" >Assignments</button>
-                                </Link>
+                                <button className="btn btn-warning" onClick={() => props.history.push('/todo/assignment', { data: todo })}>Assignment</button>
                             </td>
                         </tr>
                     ))}

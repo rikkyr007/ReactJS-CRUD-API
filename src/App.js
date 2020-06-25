@@ -5,10 +5,9 @@ import "./App.css";
 
 // import Login from "./components/auth/Login";
 import TodoList from "./components/todo/TodoList";
-// import TodoCreate from "./components/todo/TodoCreate";
-// import TodoEdit from "./components/todo/TodoEdit";
 import TodoForm from "./components/todo/TodoForm";
 import AssignmentList from "./components/assignment/AssignmentList";
+import AssignmentForm from "./components/assignment/AssignmentForm";
 
 function App() {
   return (
@@ -21,11 +20,6 @@ function App() {
                 Todo
               </Link>
             </li>
-            {/* <li className="nav-item">
-              <Link to={"/todo/add/x/"} className="nav-link">
-                Add
-              </Link>
-            </li> */}
             <li className="nav-item">
               <Link to={"/todo/add"} className="nav-link">
                 Add
@@ -39,10 +33,9 @@ function App() {
             {/* <Route exact path={["/", "/login"]} component={Login} /> */}
             <Route exact path="/todo/list" component={TodoList} />
             <Route exact path="/todo/add" component={TodoForm} />
-            {/* <Route exact path="/todo/add/x/" component={TodoCreate} /> */}
             <Route exact path="/todo/edit/:id" component={TodoForm} />
-            {/* <Route exact path="/todo/edit/x/:id" component={TodoEdit} /> */}
-            <Route exact path="/todo/assignment/:id" component={AssignmentList} />
+            <Route exact path="/todo/assignment/" component={AssignmentList} />
+            <Route exact path="/todo/assignment/edit/:id" component={AssignmentForm} />
           </Switch>
         </div>
       </div>
