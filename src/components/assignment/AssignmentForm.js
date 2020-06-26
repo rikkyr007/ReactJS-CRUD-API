@@ -8,7 +8,7 @@ const AssigmentForm = (props) => {
 
     //ambil data yang dibutuhkan
     const id = props.match.params.id;
-    const todo_id = props.location.state.data.id;
+    const todo_id = props.location.state.assignment.todo_id;
 
     //siapin state nya
     const AssignmentState = {

@@ -1,17 +1,50 @@
 import React, {
     useState, useEffect
 } from 'react';
-import todoService from "../../services/TodoService";
+import assignmentService from "../../services/AssignmentService";
 import { Link } from "react-router-dom";
-import SweetAlert from 'react-bootstrap-sweetalert';
+import swal from 'sweetalert';
 
 const AssignmentList = (props) => {
     //tangkep data
-    const data = props.location.state.data;
-    const [alert, setAlert] = useState({ show: false })
+    const prevprops = props.location.state.data;
+    const data = props.location.state.data.assignment;
+    const [assignment, setAssignment] = useState([])
+    useEffect(() => {
+        setAssignment(data);
+    }, [])
+
+    const onDeleteHandle = (id) => {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    assignmentService.remove(id)
+                        .then((res) => {
+                            const newAssignment = assignment.filter(data => data.id !== id)
+                            console.log(newAssignment, 'new assignment baru')
+                            setAssignment(newAssignment)
+                        }).catch(e => {
+                            console.log(e)
+                        })
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+    }
+
+    // useEffect(() => {
+    //     console.log(assignment,'setelah dihapus');
+    // },[assignment])
+
     return (
         <div>
-            <center><h3>Assignment List for '{data.content}' </h3></center>
+            <center><h3>Assignment List for '{prevprops.content}' </h3></center>
             <Link to={'/todo/list/'}>
                 <button className="btn btn-success mb-2"> Back</button>
             </Link>
@@ -24,14 +57,15 @@ const AssignmentList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.assignment.map((assignment) => (
+                    {assignment.map((assignment) => (
                         <tr key={assignment.id}>
                             <td>{assignment.id}</td>
                             <td>{assignment.name}</td>
                             <td>
-                                <button className="btn btn-primary" onClick={() => props.history.push('/todo/assignment/edit/' + assignment.id, { data: data })}>Update</button>
+                                <button className="btn btn-primary" onClick={() => props.history.push('/todo/assignment/edit/' + assignment.id, { assignment: assignment })}>Update</button>
                                 &nbsp;
-                                <button className="btn btn-danger">Delete</button>
+                                <button className="btn btn-danger" onClick={() => onDeleteHandle(assignment.id)}>Delete</button>
+
                             </td>
                         </tr>
                     ))}
